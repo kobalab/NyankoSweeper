@@ -7,6 +7,7 @@
     "build:html": "pug -o dist -P src/html/index.pug",
     "build:css": "stylus src/css/index.styl -o dist/nyankosweeper-0.1.0.css",
     "build:js": "webpack --mode development --devtool inline-source-map",
+    "build": "npm run build:html && npm run build:css && npm run build:js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
