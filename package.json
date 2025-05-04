@@ -1,0 +1,21 @@
+{
+  "name": "NyankoSweeper",
+  "version": "0.1.0",
+  "description": "HTML5 + JavaScript で動作する麻雀アプリ「電脳麻将」",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kobalab/NyankoSweeper.git"
+  },
+  "keywords": [],
+  "author": "Satoshi Kobayashi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kobalab/NyankoSweeper/issues"
+  },
+  "homepage": "https://github.com/kobalab/NyankoSweeper#readme",
+  "description": ""
+}
