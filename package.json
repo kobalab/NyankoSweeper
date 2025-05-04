@@ -4,6 +4,7 @@
   "description": "Macintoshユーザには懐かしいNyankoSweeperをWeb上に再現",
   "private": true,
   "scripts": {
+    "build:html": "pug -o dist -P src/html/index.pug",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
