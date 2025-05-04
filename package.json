@@ -17,5 +17,10 @@
     "url": "https://github.com/kobalab/NyankoSweeper/issues"
   },
   "homepage": "https://github.com/kobalab/NyankoSweeper#readme",
-  "description": ""
+  "overrides": {
+    "pug": "^3.0.3"
+  },
+  "devDependencies": {
+    "pug-cli": "^1.0.0-alpha6"
+  }
 }
