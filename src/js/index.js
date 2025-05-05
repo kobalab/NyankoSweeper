@@ -12,6 +12,18 @@ const Game  = require('./game');
 const Board = require('./board');
 
 $(function(){
+
+    $('a[href="#board"]').on('click', ()=>{
+        $('#rule').hide();
+        $('#board').show();
+        return false;
+    });
+    $('a[href="#rule"]').on('click', ()=>{
+        $('#board').hide();
+        $('#rule').slideDown();
+        return false;
+    });
+
     let game  = new Game(20, 12, 24);
     let board = new Board($('#board'), game);
     board.start();
