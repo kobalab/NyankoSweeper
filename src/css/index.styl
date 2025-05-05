@@ -31,11 +31,13 @@ h1
     display: none
     background-color: silver
     border: outset 5px
-    padding: 2px
-    .block
+    tr td
         border: inset 1px
+        padding: 4px
+    .block
         div
             line-height: 0
+            white-space: nowrap
             div
                 display: inline-block
                 box-sizing: border-box
@@ -44,6 +46,10 @@ h1
                 border: solid 1px
                 border-color: #ddd #666 #666 #ddd
                 background-position: -1px -1px
+                &.mark1
+                    background-image: url('mark1.gif')
+                &.mark2
+                    background-image: url('mark2.gif')
                 &.open
                     background-color: gray
                     border: solid 1px
