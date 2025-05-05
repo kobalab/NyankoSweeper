@@ -2,6 +2,8 @@
 
 Macintoshユーザには懐かしいNyankoSweeperをWeb上に再現
 
+<img src="dist/game.png" width="480" alt="ゲーム画面">
+
 ## デモ
 https://kobalab.net/nyankosweeper/
 
