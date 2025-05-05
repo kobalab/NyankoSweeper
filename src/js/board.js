@@ -73,7 +73,8 @@ module.exports = class Board {
         let game = this.game;
         let time = new Date(new Date() - game.start)
                             .toLocaleTimeString('sv', { timeZone: 'UTC'});
-        let text = `Panel = ${game.panel}/${game.x * game.y - game.n} `
+        let panel = game.x * game.y - game.n;
+        let text = `Panel = ${panel - game.panel}/${panel} `
                  + `Cat = ${game.cat}/${game.n} Time = ${time}`;
         $('.status', this.root).text(text)
     }
