@@ -37,6 +37,8 @@ module.exports = class Board {
                 this.update(x, y);
             }
         }
+        this.status();
+        this.timer = setInterval(()=> this.status(), 200);
     }
 
     update(x, y) {
@@ -55,9 +57,20 @@ module.exports = class Board {
                 block.addClass('n' + this.game.block[x][y].n);
             }
         }
+        this.status();
+    }
+
+    status() {
+        let game = this.game;
+        let time = new Date(new Date() - game.start)
+                            .toLocaleTimeString('sv', { timeZone: 'UTC'});
+        let text = `Panel = ${game.panel}/${game.x * game.y - game.n} `
+                 + `Cat = ${game.cat}/${game.n} Time = ${time}`;
+        $('.status', this.root).text(text)
     }
 
     finish(success) {
+        this.timer = clearInterval(this.timer);
         for (let y = 0; y < this.game.y; y++) {
             for (let x = 0; x < this.game.x; x++) {
                 this.update(x, y);
