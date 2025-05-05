@@ -1,5 +1,5 @@
 /*!
- *  NyankoSweeper v0.1.1
+ *  NyankoSweeper v0.2.0
  *
  *  Copyright(C) 2025 Satoshi Kobayashi
  *  Released under the MIT license
