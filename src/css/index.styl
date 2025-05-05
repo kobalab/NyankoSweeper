@@ -23,3 +23,54 @@ h1
     font-family: Georgia, serif
     text-align: right
     margin-top: -1.2em
+
+#menu
+    margin-top: 1em
+
+#board
+    display: none
+    background-color: silver
+    border: outset 5px
+    padding: 2px
+    .block
+        border: inset 1px
+        div
+            line-height: 0
+            div
+                display: inline-block
+                box-sizing: border-box
+                width: 16px
+                height: 16px
+                border: solid 1px
+                border-color: #ddd #666 #666 #ddd
+                background-position: -1px -1px
+                &.open
+                    background-color: gray
+                    border: solid 1px
+                    border-color: #666 #ddd #ddd #666
+                    &.OK
+                        background-image: url('OK.gif')
+                    &.NG
+                        background-image: url('NG.gif')
+                    &.n1
+                        background-image: url('1.gif')
+                    &.n2
+                        background-image: url('2.gif')
+                    &.n3
+                        background-image: url('3.gif')
+                    &.n4
+                        background-image: url('4.gif')
+                    &.n5
+                        background-image: url('5.gif')
+                    &.n6
+                        background-image: url('6.gif')
+                    &.n7
+                        background-image: url('7.gif')
+                    &.n8
+                        background-image: url('8.gif')
+    .status
+        span
+            font-size: 12px
+            background: white
+            padding: 1px 1em
+            border: inset 2px
