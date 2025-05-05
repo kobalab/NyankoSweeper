@@ -2,6 +2,9 @@
 
 Macintoshユーザには懐かしいNyankoSweeperをWeb上に再現
 
+## デモ
+https://kobalab.net/nyankosweeper/
+
 ## ライセンス
 [MIT](https://github.com/kobalab/NyankoSweeper/blob/master/LICENSE)
 
