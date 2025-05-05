@@ -54,18 +54,19 @@ module.exports = class Game {
     }
 
     open(x, y) {
+        if (this.block[x][y].open) return;
         this.block[x][y].open = 1;
-        if (this.view) this.view.update(x, y);
         if (this.block[x][y].n == -1) {
             this.finish(0);
             return;
         }
+        this.panel--;
+        if (this.view) this.view.update(x, y);
         if (this.block[x][y].n == 0) {
             for (let n of this.neighbor(x, y)) {
                 if (! this.block[n.x][n.y].open) this.open(n.x, n.y);
             }
         }
-        this.panel--;
         if (this.panel == 0) this.finish(1);
     }
 

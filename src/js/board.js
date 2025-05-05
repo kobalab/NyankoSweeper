@@ -37,6 +37,7 @@ module.exports = class Board {
                 this.update(x, y);
             }
         }
+        this.status();
     }
 
     update(x, y) {
@@ -55,6 +56,14 @@ module.exports = class Board {
                 block.addClass('n' + this.game.block[x][y].n);
             }
         }
+        this.status();
+    }
+
+    status() {
+        let game = this.game;
+        let text = `Panel = ${game.panel}/${game.x * game.y - game.n} `
+                 + `Cat = ${game.cat}/${game.n} Time = 00:00:00`;
+        $('.status', this.root).text(text)
     }
 
     finish(success) {
