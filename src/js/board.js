@@ -34,6 +34,9 @@ module.exports = class Board {
                 block.on('dblclick', ()=>{
                     this.game.open(x, y);
                 });
+                block.on('click', ()=>{
+                    this.game.mark(x, y);
+                });
                 this.update(x, y);
             }
         }
@@ -43,6 +46,7 @@ module.exports = class Board {
 
     update(x, y) {
         let block = this.block[y][x];
+        block.removeClass('mark1 mark2');
         if (this.game.block[x][y].open) {
             block.addClass('open');
             if (this.game.block[x][y].n == -1) {
@@ -55,6 +59,11 @@ module.exports = class Board {
             }
             else if (this.game.block[x][y].n > 0) {
                 block.addClass('n' + this.game.block[x][y].n);
+            }
+        }
+        else {
+            if (this.game.block[x][y].mark) {
+                block.addClass('mark' + this.game.block[x][y].mark);
             }
         }
         this.status();
@@ -74,7 +83,7 @@ module.exports = class Board {
         for (let y = 0; y < this.game.y; y++) {
             for (let x = 0; x < this.game.x; x++) {
                 this.update(x, y);
-                this.block[y][x].off('dblclick');
+                this.block[y][x].off('dblclick click');
             }
         }
         if (success) fanfare.play();

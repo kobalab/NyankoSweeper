@@ -71,6 +71,12 @@ module.exports = class Game {
         if (this.panel == 0) this.finish(1);
     }
 
+    mark(x, y) {
+        if (this.block[x][y].open) return;
+        this.block[x][y].mark = (this.block[x][y].mark + 1) % 3;
+        if (this.view) this.view.update(x, y);
+    }
+
     finish(success) {
         for (let y = 0; y < this.y; y++) {
             for (let x = 0; x < this.x; x++) {
