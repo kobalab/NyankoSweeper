@@ -51,6 +51,7 @@ module.exports = class Game {
         }
         this.panel = this.x * this.y - this.n;
         this.cat   = this.n;
+        this.start = new Date();
     }
 
     open(x, y) {
