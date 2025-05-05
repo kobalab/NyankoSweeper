@@ -73,7 +73,10 @@ module.exports = class Game {
 
     mark(x, y) {
         if (this.block[x][y].open) return;
+        if (! this.block[x][y].mark && this.cat == 0) return;
         this.block[x][y].mark = (this.block[x][y].mark + 1) % 3;
+        if      (this.block[x][y].mark == 1) this.cat--;
+        else if (this.block[x][y].mark == 2) this.cat++;
         if (this.view) this.view.update(x, y);
     }
 
