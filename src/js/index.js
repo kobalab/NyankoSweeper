@@ -71,8 +71,16 @@ $(function(){
 
     board = new Board($('#board'));
 
-    if (pref.size) board.start(new Game(pref.size.x, pref.size.y, pref.size.n));
-    else           board.start(new Game());
+    if (pref.size) {
+        $('form#pref input[name="size"]').val(['custom']);
+        $('form#pref input[name="x"]').val(pref.size.x);
+        $('form#pref input[name="y"]').val(pref.size.y);
+        $('form#pref input[name="n"]').val(pref.size.n);
+        board.start(new Game(pref.size.x, pref.size.y, pref.size.n));
+    }
+    else {
+        board.start(new Game());
+    }
 
     $('#loading').hide();
     $('#board').fadeIn();
