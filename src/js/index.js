@@ -21,9 +21,9 @@ function submit() {
         game  = new Game();
     }
     else {
-        let x = $('form#pref input[name="x"]').val();
-        let y = $('form#pref input[name="y"]').val();
-        let n = $('form#pref input[name="n"]').val();
+        let x = + $('form#pref input[name="x"]').val();
+        let y = + $('form#pref input[name="y"]').val();
+        let n = + $('form#pref input[name="n"]').val();
         let err;
         if      (x < 20 || y < 12) err = 'ゲーム盤が小さすぎます。';
         else if (x > 40 || y > 25) err = 'ゲーム盤が大きすぎます。';
