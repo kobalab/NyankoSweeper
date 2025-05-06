@@ -11,14 +11,15 @@ const $ = require('jquery');
 const Game  = require('./game');
 const Board = require('./board');
 
-let board;
+let board, pref;
 
 function submit() {
 
     let game;
     let size = $('form#pref input[name="size"]:checked').val();
     if (size == 'default') {
-        game  = new Game();
+        delete pref.size;
+        game = new Game();
     }
     else {
         let x = + $('form#pref input[name="x"]').val();
@@ -33,8 +34,10 @@ function submit() {
             $('form#pref .error').text(err).show().fadeOut(2000);
             return false;
         }
-        game  = new Game(x, y, n);
+        pref.size = { x: x, y: y, n: n };
+        game = new Game(x, y, n);
     }
+    localStorage.setItem('Nyanko.pref', JSON.stringify(pref));
 
     board.start(game);
     $('a[href="#board"]').trigger('click');
@@ -64,8 +67,12 @@ $(function(){
     });
     $('form#pref').on('submit', submit);
 
+    pref = JSON.parse(localStorage.getItem('Nyanko.pref')||'{}');
+
     board = new Board($('#board'));
-    board.start(new Game());
+
+    if (pref.size) board.start(new Game(pref.size.x, pref.size.y, pref.size.n));
+    else           board.start(new Game());
 
     $('#loading').hide();
     $('#board').fadeIn();
