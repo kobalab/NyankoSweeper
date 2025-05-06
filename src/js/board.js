@@ -10,17 +10,19 @@ const fanfare = new Audio('announce.wav');
 
 module.exports = class Board {
 
-    constructor(root, game) {
+    constructor(root) {
         this.root  = root;
         this.block = [];
-        this.game  = game;
-
-        game.view  = this;
     }
 
-    start() {
+    start(game) {
+        this.timer = clearInterval(this.timer);
         this.root.off('dblclick');
 
+        if (game) {
+            this.game = game;
+            game.view  = this;
+        }
         this.game.init();
         $('.block', this.root).empty();
         for (let y = 0; y < this.game.y; y++) {

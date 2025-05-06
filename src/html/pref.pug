@@ -1,0 +1,19 @@
+form#pref
+  h2 ゲーム盤
+  p.error
+  ul
+    li
+      label
+        input(type="radio" name="size" value="default" checked="checked")
+        |  30 x 17 猫: 100 (ハイスコアが登録できるのはこのサイズです)
+    li
+      label
+        input(type="radio" name="size" value="custom")
+        input(name="x" value="20" size="2")
+        |  x 
+        input(name="y" value="12" size="2")
+        |猫: 
+        input(name="n" value="24" size="3")
+        |  (20 x 12 〜 40 x 25、猫の比率 10% 以上)
+  .button
+    input(type="submit" value="設定")
