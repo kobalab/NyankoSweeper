@@ -140,8 +140,17 @@ h1
             &.rank
                 text-align: right
             &.name
-                width: 12em
+                width: 10em
                 max-width: 10em
                 white-space: nowrap
                 overflow: hidden
                 text-overflow: ellipsis
+
+@media screen and (max-width: 450px)
+    #score
+        table
+            font-size: 12px
+            width: 100%
+            min-width: auto
+            th, td
+                padding: 0.5em 0.5em
