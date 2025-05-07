@@ -49,19 +49,29 @@ $(function(){
 
     $('a[href="#board"]').on('click', ()=>{
         $('#pref').hide();
+        $('#score').hide();
         $('#rule').hide();
         $('#board').show();
         return false;
     });
     $('a[href="#pref"]').on('click', ()=>{
         $('#board').hide();
+        $('#score').hide();
         $('#rule').hide();
         $('#pref').slideDown();
+        return false;
+    });
+    $('a[href="#score"]').on('click', ()=>{
+        $('#board').hide();
+        $('#pref').hide();
+        $('#rule').hide();
+        $('#score').slideDown();
         return false;
     });
     $('a[href="#rule"]').on('click', ()=>{
         $('#board').hide();
         $('#pref').hide();
+        $('#score').hide();
         $('#rule').slideDown();
         return false;
     });
