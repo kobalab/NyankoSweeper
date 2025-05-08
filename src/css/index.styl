@@ -47,6 +47,7 @@ h1
     tr td
         border: inset 1px
         padding: 4px
+        position: relative
     .block
         margin-bottom: 6px
         div
@@ -93,6 +94,26 @@ h1
         background: white
         padding: 1px 1em
         border: inset 2px
+    .dialog
+        display: none
+        position: absolute
+        top: 0
+        left: 0
+        width: 100%
+        height: 100%
+        background: rgba(0, 0, 0, 0.3);
+        form
+            margin: 20% auto
+            font-size: 12px
+            padding: 8px
+            display: table
+            background: silver
+            border: ridge 1px
+            input
+                width: 10em
+                &::placeholder
+                    color: #999
+                    opacity: 1
 
 #pref
 #rule
