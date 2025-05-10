@@ -17,7 +17,7 @@ module.exports = class Board {
 
     start(game) {
         this.timer = clearInterval(this.timer);
-        this.root.off('dblclick');
+        $('.block', this.root).off('dblclick');
 
         if (game) {
             this.game = game;
@@ -92,6 +92,7 @@ module.exports = class Board {
         if (success) fanfare.play();
         else         mew.play();
 
-        setTimeout(()=>this.root.on('dblclick', ()=>this.start()), 10);
+        setTimeout(()=>$('.block', this.root).on('dblclick', ()=>this.start()),
+            1000);
     }
 }
