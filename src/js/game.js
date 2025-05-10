@@ -52,6 +52,7 @@ module.exports = class Game {
         this.panel = this.x * this.y - this.n;
         this.cat   = this.n;
         this.start = new Date();
+        this.score = 0;
     }
 
     open(x, y) {
@@ -82,6 +83,7 @@ module.exports = class Game {
     }
 
     finish(success) {
+        if (success) this.score = new Date() - this.start;
         for (let y = 0; y < this.y; y++) {
             for (let x = 0; x < this.x; x++) {
                 if (this.block[x][y].n == -1) this.block[x][y].open = 1;

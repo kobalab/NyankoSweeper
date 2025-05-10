@@ -28,6 +28,8 @@ h1
     font-size: 14px
     margin: 0.5em 0
     padding: 0
+    white-space: nowrap
+    overflow: auto
     li
         display: inline-block
         margin-left: 1em
@@ -45,6 +47,7 @@ h1
     tr td
         border: inset 1px
         padding: 4px
+        position: relative
     .block
         margin-bottom: 6px
         div
@@ -91,6 +94,26 @@ h1
         background: white
         padding: 1px 1em
         border: inset 2px
+    .dialog
+        display: none
+        position: absolute
+        top: 0
+        left: 0
+        width: 100%
+        height: 100%
+        background: rgba(0, 0, 0, 0.3);
+        form
+            margin: 20% auto
+            font-size: 12px
+            padding: 8px
+            display: table
+            background: silver
+            border: ridge 1px
+            input
+                width: 10em
+                &::placeholder
+                    color: #999
+                    opacity: 1
 
 #pref
 #rule
@@ -122,3 +145,33 @@ h1
         color: red
     .button
         text-align: right
+#score
+    display: none
+    margin-top: 1em
+    table
+        min-width: 420px
+        font-size: 14px
+        border-collapse: collapse
+        th, td
+            padding: 0.5em 1em
+        th
+            border-bottom: solid 2px silver
+        td
+            border-bottom: dotted 1px silver
+            &.rank
+                text-align: right
+            &.name
+                width: 10em
+                max-width: 10em
+                white-space: nowrap
+                overflow: hidden
+                text-overflow: ellipsis
+
+@media screen and (max-width: 450px)
+    #score
+        table
+            font-size: 12px
+            width: 100%
+            min-width: auto
+            th, td
+                padding: 0.5em 0.5em

@@ -1,4 +1,4 @@
-- var version = '0.3.1'
+- var version = '0.4.0'
 
 doctype html
 html(lang="ja")
@@ -32,6 +32,10 @@ html(lang="ja")
         td
           .block
           span.status
+          .dialog
+            form
+              input(name="yourname" placeholder="(名前を入力)")
 
     include pref
+    include score
     include rule

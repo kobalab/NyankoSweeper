@@ -17,7 +17,7 @@ module.exports = class Board {
 
     start(game) {
         this.timer = clearInterval(this.timer);
-        this.root.off('dblclick');
+        $('.block', this.root).off('dblclick');
 
         if (game) {
             this.game = game;
@@ -73,7 +73,7 @@ module.exports = class Board {
 
     status() {
         let game = this.game;
-        let time = new Date(new Date() - game.start)
+        let time = new Date(game.score || new Date() - game.start)
                             .toLocaleTimeString('sv', { timeZone: 'UTC'});
         let panel = game.x * game.y - game.n;
         let text = `Panel = ${panel - game.panel}/${panel} `
@@ -89,9 +89,14 @@ module.exports = class Board {
                 this.block[y][x].off('dblclick click');
             }
         }
-        if (success) fanfare.play();
-        else         mew.play();
-
-        setTimeout(()=>this.root.on('dblclick', ()=>this.start()), 10);
+        if (success) {
+            fanfare.play();
+            this.callback();
+        }
+        else {
+            mew.play();
+        }
+        setTimeout(()=>$('.block', this.root).on('dblclick', ()=>this.start()),
+            1000);
     }
 }
