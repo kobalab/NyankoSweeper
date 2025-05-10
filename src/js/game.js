@@ -52,7 +52,7 @@ module.exports = class Game {
         this.panel = this.x * this.y - this.n;
         this.cat   = this.n;
         this.start = new Date();
-        this.score = -1;
+        this.score = 0;
     }
 
     open(x, y) {

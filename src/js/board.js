@@ -73,7 +73,7 @@ module.exports = class Board {
 
     status() {
         let game = this.game;
-        let time = new Date(new Date() - game.start)
+        let time = new Date(game.score || new Date() - game.start)
                             .toLocaleTimeString('sv', { timeZone: 'UTC'});
         let panel = game.x * game.y - game.n;
         let text = `Panel = ${panel - game.panel}/${panel} `
