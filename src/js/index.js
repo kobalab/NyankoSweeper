@@ -135,8 +135,8 @@ $(function(){
         $('form#pref input[name="x"]').val(pref.size.x);
         $('form#pref input[name="y"]').val(pref.size.y);
         $('form#pref input[name="n"]').val(pref.size.n);
-        $('#board input[name="yourname"]').val(pref.yourname);
     }
+    $('#board input[name="yourname"]').val(pref.yourname);
 
     board = new Board($('#board'));
 
