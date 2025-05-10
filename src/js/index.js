@@ -73,6 +73,7 @@ function submit() {
 
 function addRecord(score, yourname) {
     $('#board .dialog').hide();
+    if (! yourname) return;
     record.push({ score: score, name: yourname, date: Date.now()});
     record = record.sort((a, b)=> a.score - b.score).slice(0, 10);
     localStorage.setItem('Nyanko.record', JSON.stringify(record));
