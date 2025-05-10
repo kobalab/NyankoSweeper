@@ -89,9 +89,16 @@ module.exports = class Board {
                 this.block[y][x].off('dblclick click');
             }
         }
-        if (success) fanfare.play();
-        else         mew.play();
-
+        if (success) {
+            fanfare.play();
+            setTimeout(()=>{
+                $('.dialog', this.root).show();
+                $('.dialog input', this.root).focus();
+            }, 1000);
+        }
+        else {
+            mew.play();
+        }
         setTimeout(()=>$('.block', this.root).on('dblclick', ()=>this.start()),
             1000);
     }
