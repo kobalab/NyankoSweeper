@@ -17,18 +17,28 @@ function init() {
 
     let game;
 
+    $('#board .dialog form').off('submit');
+
     if (pref.size) {
         game = new Game(pref.size.x, pref.size.y, pref.size.n);
+        board.callback = ()=>{};
     }
     else {
         game = new Game();
+        board.callback = ()=>{
+            setTimeout(()=>{
+                $('.dialog', this.root).show();
+                $('.dialog input', this.root).focus();
+            }, 800);
+        };
+        $('#board .dialog form').on('submit', ()=>{
+            pref.yourname = $('#board input[name="yourname"]').val();
+            localStorage.setItem('Nyanko.pref', JSON.stringify(pref));
+            addRecord(game.score, pref.yourname);
+            return false;
+        });
     }
-    $('#board .dialog form').off('submit').on('submit', ()=>{
-        pref.yourname = $('#board input[name="yourname"]').val();
-        localStorage.setItem('Nyanko.pref', JSON.stringify(pref));
-        addRecord(game.score, pref.yourname);
-        return false;
-    });
+
     board.start(game);
 }
 

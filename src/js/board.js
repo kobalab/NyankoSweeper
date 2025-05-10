@@ -91,10 +91,7 @@ module.exports = class Board {
         }
         if (success) {
             fanfare.play();
-            setTimeout(()=>{
-                $('.dialog', this.root).show();
-                $('.dialog input', this.root).focus();
-            }, 1000);
+            this.callback();
         }
         else {
             mew.play();
