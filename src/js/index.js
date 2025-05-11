@@ -1,5 +1,5 @@
 /*!
- *  NyankoSweeper v0.4.0
+ *  NyankoSweeper v0.4.1
  *
  *  Copyright(C) 2025 Satoshi Kobayashi
  *  Released under the MIT license
@@ -73,24 +73,40 @@ function submit() {
 
 function addRecord(score, yourname) {
     $('#board .dialog').hide();
-    record.push({ score: score, name: yourname, date: Date.now()});
+    if (! yourname) return;
+    let date = Date.now();
+    record.push({ score: score, name: yourname, date: date });
     record = record.sort((a, b)=> a.score - b.score).slice(0, 10);
     localStorage.setItem('Nyanko.record', JSON.stringify(record));
+    if (record.find(r => r.score == score && r.name == yourname
+                            && r.date == date))
+    {
+        showRecord(score, yourname, date);
+        $('#board').hide();
+        $('#pref').hide();
+        $('#rule').hide();
+        $('#score').slideDown();
+    }
 }
 
-function showRecord() {
+function showRecord(score, yourname, date) {
 
     $('#score td.name').text('');
     $('#score td.score').text('');
     $('#score td.date').text('');
+    $('#score tr').removeClass('new');
 
-    for (let i = 0; i < 10 && i < record.length; i++) {
-        let score = new Date(record[i].score)
-                            .toLocaleTimeString('sv', { timeZone: 'UTC'})
-        let date  = new Date(record[i].date).toLocaleDateString('sv')
-        $('#score td.name').eq(i).text(record[i].name);
-        $('#score td.score').eq(i).text(score);
-        $('#score td.date').eq(i).text(date);
+    let i = 0;
+    for (let r of record) {
+        if (r.score == score && r.name == yourname && r.date == date) {
+            $('#score tr').eq(i + 1).addClass('new');
+        }
+        $('#score td.name').eq(i).text(r.name);
+        $('#score td.score').eq(i).text(
+                new Date(r.score).toLocaleTimeString('sv', { timeZone: 'UTC'}));
+        $('#score td.date').eq(i).text(
+                new Date(r.date).toLocaleDateString('sv'));
+        i++;
     }
 }
 
