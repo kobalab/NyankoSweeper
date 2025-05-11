@@ -1,11 +1,11 @@
 {
   "name": "NyankoSweeper",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Macintoshユーザには懐かしいNyankoSweeperをWeb上に再現",
   "private": true,
   "scripts": {
     "build:html": "pug -o dist -P src/html/index.pug",
-    "build:css": "stylus src/css/index.styl -o dist/nyankosweeper-0.4.0.css",
+    "build:css": "stylus src/css/index.styl -o dist/nyankosweeper-0.4.1.css",
     "build:js": "webpack --mode development --devtool inline-source-map",
     "build": "npm run build:html && npm run build:css && npm run build:js",
     "release": "npm run clean && npm run build:html && npm run build:css && webpack --mode production",
