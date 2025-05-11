@@ -9,7 +9,8 @@
     "build:js": "webpack --mode development --devtool inline-source-map",
     "build": "npm run build:html && npm run build:css && npm run build:js",
     "release": "npm run clean && npm run build:html && npm run build:css && webpack --mode production",
-    "clean": "rm -f dist/*.{html,css,js}"
+    "clean": "rm -f dist/*.{html,css,js}",
+    "start": "node bin/server.js -d dist"
   },
   "repository": {
     "type": "git",
