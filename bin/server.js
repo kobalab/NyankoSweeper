@@ -9,16 +9,19 @@ const yargs = require('yargs');
 const argv = yargs
     .usage('Usage: $0 [ options... ]')
     .option('port',     { alias: 'p', default: 4187 })
-    .option('baseurl',  { alias: 'b', default: '/server'})
+    .option('baseurl',  { alias: 'b', default: '/score'})
     .option('docroot',  { alias: 'd' })
     .option('store',    { alias: 's' })
+    .demandCommand(1)
     .argv;
+const file = path.resolve(argv._[0]);
 const port = argv.port;
 const base = ('' + argv.baseurl)
                     .replace(/^(?!\/.*)/, '/$&')
                     .replace(/\/$/,'');
 const docs = argv.docroot && path.resolve(argv.docroot);
 
+const score    = require('../src/js/score')(file);
 const express  = require('express');
 const store    = ! argv.store ? null
                : new (require('session-file-store')(
@@ -34,7 +37,9 @@ const session  = require('express-session')({
 
 const app = express();
 app.use(session);
-app.get(base, (req, res)=>res.status(200).send('<h1>NyankoSweeper</h1>'));
+app.use(express.json());
+app.get(base, score.get());
+app.post(base, score.post());
 if (docs) app.use(express.static(docs));
 app.use((req, res)=>res.status(404).send('<h1>Not Found</h1>'));
 
