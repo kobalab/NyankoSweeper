@@ -7,7 +7,7 @@ const path  = require('path');
 
 const yargs = require('yargs');
 const argv = yargs
-    .usage('Usage: $0 [ options... ]')
+    .usage('Usage: $0 [ options... ] score-file')
     .option('port',     { alias: 'p', default: 4187 })
     .option('baseurl',  { alias: 'b', default: '/score'})
     .option('docroot',  { alias: 'd' })
