@@ -15,5 +15,15 @@ form#pref
         |猫: 
         input(name="n" value="24" size="3")
         |  (20 x 12 〜 40 x 25、猫の比率 10% 以上)
+  h2 ハイスコア
+  ul
+    li
+      label
+        input(type="radio" name="private" value="0" checked="checked")
+        | ネットで共有
+    li
+      label
+        input(type="radio" name="private" value="1")
+        |  ローカルに保存
   .button
     input(type="submit" value="設定")
