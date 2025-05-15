@@ -92,7 +92,7 @@ async function addRecord(score, yourname) {
                 headers: { 'content-type': 'application/json' },
                 body:    JSON.stringify(
                             { score: score, name: yourname, date: date }) });
-        record = await (await fetch(url)).json();
+        record = (await (await fetch(url)).json()).slice(0, 10);
     }
     if (record.find(r => r.score == score && r.name == yourname
                             && r.date == date))
