@@ -9,11 +9,17 @@ class Score {
 
     constructor(file) {
         this.file = file;
-        this.record = JSON.parse(fs.readFileSync(file));
+        this.record
+            = fs.readFileSync(file, 'utf-8')
+                .split(/\n/).filter(r=>r)
+                .map(r=>{ r = r.split(/\t/);
+                          return { score: +r[1], name: r[2], date: +r[0] } });
         this.save();
     }
     save() {
-        fs.writeFileSync(this.file, JSON.stringify(this.record));
+        fs.writeFileSync(this.file,
+                    this.record.map(r=>`${r.date}\t${r.score}\t${r.name}\n`)
+                               .join(''));
     }
     get() {
         return (req, res)=>{
