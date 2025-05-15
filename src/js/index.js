@@ -121,8 +121,7 @@ function showPref() {
         $('form#pref input[name="y"]').val(pref.size.y);
         $('form#pref input[name="n"]').val(pref.size.n);
     }
-    $('form#pref input[name="private"]').val([pref.private || 0])
-    $('#board input[name="yourname"]').val(pref.yourname);
+    $('form#pref input[name="private"]').val([pref.private || 0]);
 
     $('#board').hide();
     $('#score').hide();
@@ -182,6 +181,7 @@ $(function(){
     $('form#pref').on('submit', submit);
 
     pref = JSON.parse(localStorage.getItem('Nyanko.pref')||'{}');
+    $('#board input[name="yourname"]').val(pref.yourname);
 
     board = new Board($('#board'));
 
