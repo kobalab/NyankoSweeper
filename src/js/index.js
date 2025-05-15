@@ -163,7 +163,6 @@ async function showRecord(score, yourname, date) {
     $('#pref').hide();
     $('#rule').hide();
     $('#score').slideDown();
-    return false;
 }
 
 function showRule() {
@@ -178,7 +177,7 @@ $(function(){
 
     $('a[href="#board"]').on('click', showBoard);
     $('a[href="#pref"]').on('click', showPref);
-    $('a[href="#score"]').on('click', showRecord);
+    $('a[href="#score"]').on('click', ()=>{ showRecord(); return false });
     $('a[href="#rule"]').on('click', showRule);
     $('form#pref').on('submit', submit);
 
