@@ -1,5 +1,5 @@
 {
-  "name": "NyankoSweeper",
+  "name": "nyanko-sweeper",
   "version": "0.4.1",
   "description": "Macintoshユーザには懐かしいNyankoSweeperをWeb上に再現",
   "bin": {
