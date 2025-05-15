@@ -2,7 +2,6 @@
   "name": "NyankoSweeper",
   "version": "0.4.1",
   "description": "Macintoshユーザには懐かしいNyankoSweeperをWeb上に再現",
-  "private": true,
   "bin": {
     "nyanko-score": "./bin/server.js"
   },
