@@ -23,7 +23,7 @@ class Score {
     }
     get() {
         return (req, res)=>{
-            res.json(this.record.sort((a, b)=> a.score - b.score));
+            res.json(this.record.toSorted((a, b)=> a.score - b.score));
         };
     }
     post() {
