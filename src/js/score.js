@@ -28,10 +28,14 @@ class Score {
     }
     post() {
         return (req, res)=>{
+            if (! req.session) return res.status(403).end('<h1>Forbidden</h1>');
+            if (! req.body) return res.status(400).end('<h1>Bad Request</h1>');
             let { score, name, date } = req.body;
+            if (! score || ! name || ! date )
+                            return res.status(400).end('<h1>Bad Request</h1>');
             this.record.push({ score: + score, name: name, date: + date });
             this.save();
-            res.status(200).end();
+            res.status(200).end('<h1>OK</h1>');
         };
     }
 }
