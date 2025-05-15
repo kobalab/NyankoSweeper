@@ -12,6 +12,7 @@ const Game  = require('./game');
 const Board = require('./board');
 
 let board, pref, record;
+const url = 'score';
 
 function init() {
 
@@ -86,12 +87,12 @@ async function addRecord(score, yourname) {
         localStorage.setItem('Nyanko.record', JSON.stringify(record));
     }
     else {
-        await fetch('score', {
+        await fetch(url, {
                 method:  'POST',
                 headers: { 'content-type': 'application/json' },
                 body:    JSON.stringify(
                             { score: score, name: yourname, date: date }) });
-        record = await (await fetch('score')).json();
+        record = await (await fetch(url)).json();
     }
     if (record.find(r => r.score == score && r.name == yourname
                             && r.date == date))
@@ -142,7 +143,7 @@ async function showRecord(score, yourname, date) {
         record = JSON.parse(localStorage.getItem('Nyanko.record')||'[]');
     }
     else {
-        record = await (await fetch('score')).json();
+        record = await (await fetch(url)).json();
     }
 
     let i = 0;
@@ -185,7 +186,7 @@ $(function(){
 
     board = new Board($('#board'));
 
-    fetch('score');
+    fetch(url);
 
     $('#loading').hide();
 
