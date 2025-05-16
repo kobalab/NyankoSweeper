@@ -15,6 +15,7 @@ https://kobalab.net/nyankosweeper/
 | ``build:js``    | JavaScriptのみデバッグ用にビルドする。
 | ``build:css``   | CSSのみビルドする。
 | ``build:html``  | HTMLのみビルドする。
+| ``start``       | ハイスコア・サーバを起動する
 
 ## ライセンス
 [MIT](https://github.com/kobalab/NyankoSweeper/blob/master/LICENSE)
