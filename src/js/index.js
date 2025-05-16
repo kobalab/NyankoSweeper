@@ -1,5 +1,5 @@
 /*!
- *  NyankoSweeper v0.4.1
+ *  NyankoSweeper v1.0.0
  *
  *  Copyright(C) 2025 Satoshi Kobayashi
  *  Released under the MIT license
@@ -12,6 +12,7 @@ const Game  = require('./game');
 const Board = require('./board');
 
 let board, pref, record;
+const url = 'score';
 
 function init() {
 
@@ -39,6 +40,8 @@ function init() {
         });
     }
 
+    $('#board').fadeIn();
+
     board.start(game);
 }
 
@@ -63,25 +66,38 @@ function submit() {
         }
         pref.size = { x: x, y: y, n: n };
     }
+    pref.private = + $('form#pref input[name="private"]:checked').val();
     localStorage.setItem('Nyanko.pref', JSON.stringify(pref));
 
     init();
-    $('a[href="#board"]').trigger('click');
+    showBoard();
 
     return false;
 }
 
-function addRecord(score, yourname) {
+async function addRecord(score, yourname) {
     $('#board .dialog').hide();
     if (! yourname) return;
     let date = Date.now();
-    record.push({ score: score, name: yourname, date: date });
-    record = record.sort((a, b)=> a.score - b.score).slice(0, 10);
-    localStorage.setItem('Nyanko.record', JSON.stringify(record));
+    let record;
+    if (pref.private) {
+        record = JSON.parse(localStorage.getItem('Nyanko.record')||'[]');
+        record.push({ score: score, name: yourname, date: date });
+        record = record.sort((a, b)=> a.score - b.score).slice(0, 10);
+        localStorage.setItem('Nyanko.record', JSON.stringify(record));
+    }
+    else {
+        await fetch(url, {
+                method:  'POST',
+                headers: { 'content-type': 'application/json' },
+                body:    JSON.stringify(
+                            { score: score, name: yourname, date: date }) });
+        record = (await (await fetch(url)).json()).slice(0, 10);
+    }
     if (record.find(r => r.score == score && r.name == yourname
                             && r.date == date))
     {
-        showRecord(score, yourname, date);
+        await showRecord(score, yourname, date);
         $('#board').hide();
         $('#pref').hide();
         $('#rule').hide();
@@ -89,12 +105,45 @@ function addRecord(score, yourname) {
     }
 }
 
-function showRecord(score, yourname, date) {
+function showBoard() {
+    $('#pref').hide();
+    $('#score').hide();
+    $('#rule').hide();
+    $('#board').show();
+    return false;
+}
+
+function showPref() {
+
+    if (pref.size) {
+        $('form#pref input[name="size"]').val(['custom']);
+        $('form#pref input[name="x"]').val(pref.size.x);
+        $('form#pref input[name="y"]').val(pref.size.y);
+        $('form#pref input[name="n"]').val(pref.size.n);
+    }
+    $('form#pref input[name="private"]').val([pref.private || 0]);
+
+    $('#board').hide();
+    $('#score').hide();
+    $('#rule').hide();
+    $('#pref').slideDown();
+    return false;
+}
+
+async function showRecord(score, yourname, date) {
 
     $('#score td.name').text('');
     $('#score td.score').text('');
     $('#score td.date').text('');
     $('#score tr').removeClass('new');
+
+    let recored = [];
+    if (pref.private) {
+        record = JSON.parse(localStorage.getItem('Nyanko.record')||'[]');
+    }
+    else {
+        record = await (await fetch(url)).json();
+    }
 
     let i = 0;
     for (let r of record) {
@@ -108,56 +157,37 @@ function showRecord(score, yourname, date) {
                 new Date(r.date).toLocaleDateString('sv'));
         i++;
     }
+
+    $('#board').hide();
+    $('#pref').hide();
+    $('#rule').hide();
+    $('#score').slideDown();
+}
+
+function showRule() {
+    $('#board').hide();
+    $('#pref').hide();
+    $('#score').hide();
+    $('#rule').slideDown();
+    return false;
 }
 
 $(function(){
 
-    $('a[href="#board"]').on('click', ()=>{
-        $('#pref').hide();
-        $('#score').hide();
-        $('#rule').hide();
-        $('#board').show();
-        return false;
-    });
-    $('a[href="#pref"]').on('click', ()=>{
-        $('#board').hide();
-        $('#score').hide();
-        $('#rule').hide();
-        $('#pref').slideDown();
-        return false;
-    });
-    $('a[href="#score"]').on('click', ()=>{
-        showRecord();
-        $('#board').hide();
-        $('#pref').hide();
-        $('#rule').hide();
-        $('#score').slideDown();
-        return false;
-    });
-    $('a[href="#rule"]').on('click', ()=>{
-        $('#board').hide();
-        $('#pref').hide();
-        $('#score').hide();
-        $('#rule').slideDown();
-        return false;
-    });
+    $('a[href="#board"]').on('click', showBoard);
+    $('a[href="#pref"]').on('click', showPref);
+    $('a[href="#score"]').on('click', ()=>{ showRecord(); return false });
+    $('a[href="#rule"]').on('click', showRule);
     $('form#pref').on('submit', submit);
 
-    pref   = JSON.parse(localStorage.getItem('Nyanko.pref')||'{}');
-    record = JSON.parse(localStorage.getItem('Nyanko.record')||'[]');
-
-    if (pref.size) {
-        $('form#pref input[name="size"]').val(['custom']);
-        $('form#pref input[name="x"]').val(pref.size.x);
-        $('form#pref input[name="y"]').val(pref.size.y);
-        $('form#pref input[name="n"]').val(pref.size.n);
-    }
+    pref = JSON.parse(localStorage.getItem('Nyanko.pref')||'{}');
     $('#board input[name="yourname"]').val(pref.yourname);
 
     board = new Board($('#board'));
 
-    init();
+    fetch(url);
 
     $('#loading').hide();
-    $('#board').fadeIn();
+
+    init();
 });
