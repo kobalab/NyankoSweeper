@@ -121,6 +121,9 @@ function showPref() {
         $('form#pref input[name="y"]').val(pref.size.y);
         $('form#pref input[name="n"]').val(pref.size.n);
     }
+    else {
+        $('form#pref input[name="size"]').val(['default']);
+    }
     $('form#pref input[name="private"]').val([pref.private || 0]);
 
     $('#board').hide();
@@ -179,6 +182,8 @@ $(function(){
     $('a[href="#score"]').on('click', ()=>{ showRecord(); return false });
     $('a[href="#rule"]').on('click', showRule);
     $('form#pref').on('submit', submit);
+    $('[name="x"], [name="y"], [name="n"]').on('change', ()=>
+                            $('form#pref input[name="size"]').val(['custom']));
 
     pref = JSON.parse(localStorage.getItem('Nyanko.pref')||'{}');
     $('#board input[name="yourname"]').val(pref.yourname);
