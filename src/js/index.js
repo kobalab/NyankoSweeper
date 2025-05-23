@@ -136,6 +136,9 @@ async function showRecord(score, yourname, date) {
     $('#score td.score').text('');
     $('#score td.date').text('');
     $('#score tr').removeClass('new');
+    $('#score tr:gt(10)').remove();
+    const tr = $('#score tr').eq(1).clone();
+    $('#score .more').hide();
 
     let recored = [];
     if (pref.private) {
@@ -146,7 +149,12 @@ async function showRecord(score, yourname, date) {
     }
 
     let i = 0;
-    for (let r of record) {
+    for (let r of record.slice(0,500)) {
+        if ($('#score tr').length < i + 2) {
+            $('#score table').append(tr.clone().hide());
+            $('#score td.rank').eq(i).text(i + 1);
+            $('#score .more').show();
+        }
         if (r.score == score && r.name == yourname && r.date == date) {
             $('#score tr').eq(i + 1).addClass('new');
         }
@@ -179,6 +187,11 @@ $(function(){
     $('a[href="#score"]').on('click', ()=>{ showRecord(); return false });
     $('a[href="#rule"]').on('click', showRule);
     $('form#pref').on('submit', submit);
+    $('#score .more').on('click', ()=>{
+        $('#score tr').show();
+        $('#score .more').hide();
+        return false;
+    })
 
     pref = JSON.parse(localStorage.getItem('Nyanko.pref')||'{}');
     $('#board input[name="yourname"]').val(pref.yourname);
