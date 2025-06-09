@@ -17,6 +17,7 @@ class Score {
         this.save();
     }
     save() {
+        this.record = this.record.slice(-1000);
         fs.writeFileSync(this.file,
                     this.record.map(r=>`${r.date}\t${r.score}\t${r.name}\n`)
                                .join(''));
