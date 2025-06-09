@@ -21,7 +21,7 @@ const base = ('' + argv.baseurl)
                     .replace(/\/$/,'');
 const docs = argv.docroot && path.resolve(argv.docroot);
 
-const score    = require('../src/js/score')(file);
+const score    = require('./score')(file);
 const express  = require('express');
 const store    = ! argv.store ? null
                : new (require('session-file-store')(
